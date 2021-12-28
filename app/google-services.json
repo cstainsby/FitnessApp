@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "841104850622",
+    "firebase_url": "https://fitnessapp-cc575-default-rtdb.firebaseio.com",
+    "project_id": "fitnessapp-cc575",
+    "storage_bucket": "fitnessapp-cc575.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841104850622:android:c4a56c454264aa3e81a8ef",
+        "android_client_info": {
+          "package_name": "stainsby.cole.fitnessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841104850622-9en0to38hjc6n6ijnf5ulgqa3okmihim.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "stainsby.cole.fitnessapp",
+            "certificate_hash": "f9db63c6ed250f81af9200441c1609cd851e77b0"
+          }
+        },
+        {
+          "client_id": "841104850622-o08n7oqi60icjuc2rmbv7to1t2q8al7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyydRadsVdxpL-2hqpZbr5Q0wnIjZAIpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841104850622-o08n7oqi60icjuc2rmbv7to1t2q8al7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

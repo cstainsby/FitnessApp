@@ -17,8 +17,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     // the three fragments accessible from the bottom nav menu
     private static final HomeFragment homeFragment = new HomeFragment();
     private static final UserInfoFragment userInfoFragment = new UserInfoFragment();
