@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: 12/27/2021 add loading bar to activity main while it loads the home fragment
+        // initially set the view to home fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
 
         navigationView = findViewById(R.id.bottomNavigationView);
         navigationView.setSelectedItemId(R.id.home);
