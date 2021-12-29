@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     // the three fragments accessible from the bottom nav menu
-    private static final HomeFragment homeFragment = new HomeFragment();
-    private static final UserInfoFragment userInfoFragment = new UserInfoFragment();
-    private static final ScheduleFragment scheduleFragment = new ScheduleFragment();
-    private static final NotSignedInFragment notSignedInFragment = new NotSignedInFragment();
+    private final HomeFragment homeFragment = new HomeFragment();
+    private final UserInfoFragment userInfoFragment = new UserInfoFragment();
+    private final ScheduleFragment scheduleFragment = new ScheduleFragment();
+    private final NotSignedInFragment notSignedInFragment = new NotSignedInFragment();
 
     private FirebaseAuth mAuth;
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseUser currentUser = mAuth.getCurrentUser();
                         // if the user isn't signed in they cant use the user tab, redirect them to not signed in fragment
                         if(currentUser == null) {
-                            Log.d(TAG, "onNavigationItemSelected: navigating to not signed in fragment");
+                            Log.d(TAG, "onNavigationItemSelected: starting authentication activity");
                             setCurrentFragment(notSignedInFragment);
                         } else {
                             Log.d(TAG, "onNavigationItemSelected: navigating to user info fragment");

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="16dp"
     tools:context=".NotSignedInFragment">
 
     <TextView
@@ -13,9 +14,15 @@
         android:text="You Aren't Signed In" />
 
     <Button
-        android:id="@+id/toAuthenticationButton"
+        android:id="@+id/signInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign In"/>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"/>
 
 </LinearLayout>

@@ -2,10 +2,12 @@ package stainsby.cole.fitnessapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,12 +25,47 @@ public class UserAuthenticationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private TextView titleTextView;
+
+    // TODO: 12/29/2021 Is there a better solution than this?
+    public static final int SIGN_IN = 0;
+    public static final int REGISTER = 1;
+
+    private final RequiredUserInfoFrag requiredInfoFragment = new RequiredUserInfoFrag();
+    private final OptionalUserInfoFrag optionalUserInfoFragment = new OptionalUserInfoFrag();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_authentication);
 
+        // xml view elements
+        titleTextView = findViewById(R.id.userAuthenticationTitle);
+
+        // firebase elements
         mAuth = FirebaseAuth.getInstance();
+
+        // read in intent data
+        Intent data = getIntent();
+        int authType = data.getIntExtra("authType", -1);
+
+        switch(authType) {
+            case SIGN_IN:
+                titleTextView.setText("Sign In");
+            case REGISTER:
+                titleTextView.setText("Register");
+        }
+
+        setCurrentFragment(requiredInfoFragment);
+    }
+
+    private void setCurrentFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .setReorderingAllowed(true)
+                .addToBackStack(fragment.getTag())
+                .commit();
     }
 
     private void isRegistered(String email) {

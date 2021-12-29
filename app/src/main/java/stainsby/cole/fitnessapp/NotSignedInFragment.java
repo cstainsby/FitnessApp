@@ -20,7 +20,12 @@ public class NotSignedInFragment extends Fragment{
 
     private static final String TAG = "NotSignedInFragment";
 
-    private Button toAuthenticationButton;
+    // both the sign in and register button will lead to the UserAuthentication activity but will
+    // change what is displayed
+    //  0 for signIn
+    //  1 for register
+    private Button signInButton;
+    private Button registerButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,12 +73,26 @@ public class NotSignedInFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_not_signed_in, container, false);
 
-        toAuthenticationButton = view.findViewById(R.id.toAuthenticationButton);
-        toAuthenticationButton.setOnClickListener(new View.OnClickListener() {
+        // sign in button definition
+        signInButton = view.findViewById(R.id.signInButton);
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: starting authentication activity");
+                Log.d(TAG, "onClick: starting sign in activity");
                 Intent intent = new Intent(getActivity(), UserAuthenticationActivity.class);
+                intent.putExtra("authType", UserAuthenticationActivity.SIGN_IN);
+                startActivity(intent);
+            }
+        });
+
+        // register button definition
+        registerButton = view.findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: starting register activity");
+                Intent intent = new Intent(getActivity(), UserAuthenticationActivity.class);
+                intent.putExtra("authType", UserAuthenticationActivity.REGISTER);
                 startActivity(intent);
             }
         });

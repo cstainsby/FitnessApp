@@ -4,12 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_user_authentication.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_user_info.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_user_registration.xml" value="0.1461499493414387" />
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_error.xml" value="0.264" />
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_first.xml" value="0.1526268115942029" />
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_home.xml" value="0.16621376811594202" />
-        <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_not_signed_in.xml" value="0.1609375" />
+        <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_not_signed_in.xml" value="0.264" />
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_optional_user_info.xml" value="0.264" />
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_required_info_authentication.xml" value="0.2866847826086957" />
         <entry key="..\:/Users/Cpsta/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_schedule.xml" value="0.16621376811594202" />
