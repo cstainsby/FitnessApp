@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import android.widget.Button;
  *      e.g. if the user is not signed in and trys to access the user page they should be directed to this page
  *  this page will let users access the user authentication and registration activity
  */
-public class NotSignedInFragment extends Fragment implements View.OnClickListener{
+public class NotSignedInFragment extends Fragment{
+
+    private static final String TAG = "NotSignedInFragment";
 
     private Button toAuthenticationButton;
 
@@ -63,16 +66,18 @@ public class NotSignedInFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_not_signed_in, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_not_signed_in, container, false);
 
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.toAuthenticationButton:
+        toAuthenticationButton = view.findViewById(R.id.toAuthenticationButton);
+        toAuthenticationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: starting authentication activity");
                 Intent intent = new Intent(getActivity(), UserAuthenticationActivity.class);
-
                 startActivity(intent);
-        }
+            }
+        });
+
+        return view;
     }
 }

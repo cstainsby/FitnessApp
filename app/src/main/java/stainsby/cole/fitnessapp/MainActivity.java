@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
@@ -18,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     // the three fragments accessible from the bottom nav menu
     private static final HomeFragment homeFragment = new HomeFragment();
@@ -48,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
+                        Log.d(TAG, "onNavigationItemSelected: navigating to home fragment");
                         setCurrentFragment(homeFragment);
                         return true;
 
                     case R.id.schedule:
+                        Log.d(TAG, "onNavigationItemSelected: navigating to schedule fragment ");
                         setCurrentFragment(scheduleFragment);
                         return true;
 
@@ -59,12 +64,15 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseUser currentUser = mAuth.getCurrentUser();
                         // if the user isn't signed in they cant use the user tab, redirect them to not signed in fragment
                         if(currentUser == null) {
+                            Log.d(TAG, "onNavigationItemSelected: navigating to not signed in fragment");
                             setCurrentFragment(notSignedInFragment);
                         } else {
+                            Log.d(TAG, "onNavigationItemSelected: navigating to user info fragment");
                             setCurrentFragment(userInfoFragment);
                         }
                         return true;
                 }
+                Log.d(TAG, "onNavigationItemSelected: error, displaying error fragment");
                 throwErrorFragment();
                 return false;
             }
