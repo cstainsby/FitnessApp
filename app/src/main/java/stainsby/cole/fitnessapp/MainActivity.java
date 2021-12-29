@@ -14,6 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private static final HomeFragment homeFragment = new HomeFragment();
     private static final UserInfoFragment userInfoFragment = new UserInfoFragment();
     private static final ScheduleFragment scheduleFragment = new ScheduleFragment();
+    private static final NotSignedInFragment notSignedInFragment = new NotSignedInFragment();
+
+    private FirebaseAuth mAuth;
 
     // the bottom navigation view
     private BottomNavigationView navigationView;
@@ -29,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // initialize firebase components
+        mAuth = FirebaseAuth.getInstance();
 
         // initially set the view to home fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
@@ -48,7 +56,13 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.user:
-                        setCurrentFragment(userInfoFragment);
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        // if the user isn't signed in they cant use the user tab, redirect them to not signed in fragment
+                        if(currentUser == null) {
+                            setCurrentFragment(notSignedInFragment);
+                        } else {
+                            setCurrentFragment(userInfoFragment);
+                        }
                         return true;
                 }
                 throwErrorFragment();

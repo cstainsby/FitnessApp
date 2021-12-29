@@ -31,12 +31,12 @@ public class UserAuthenticationActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    private boolean isRegistered(String email) {
+    private void isRegistered(String email) {
         mAuth.fetchSignInMethodsForEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                     @Override
                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                        isRegistered = task.getResult().getSignInMethods().isEmpty();
+                        //TODO isRegistered = task.getResult().getSignInMethods().isEmpty();
                     }
                 });
     }
