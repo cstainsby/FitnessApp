@@ -20,6 +20,32 @@ public class User {
         this.email = email;
     }
 
+    //--------------------------------------------------------------------------------
+    // getters
+    //--------------------------------------------------------------------------------
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    //--------------------------------------------------------------------------------
+    // setters
+    //--------------------------------------------------------------------------------
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

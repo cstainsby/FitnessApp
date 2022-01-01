@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  * Use the {@link RequiredUserInfoFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RequiredUserInfoFrag extends Fragment {
+public class RequiredUserInfoFrag extends AuthenticationFragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +60,10 @@ public class RequiredUserInfoFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_required_info_authentication, container, false);
+    }
+
+    @Override
+    protected void saveDataToFirebase() {
+
     }
 }

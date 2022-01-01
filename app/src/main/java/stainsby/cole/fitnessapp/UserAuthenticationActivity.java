@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 
 public class UserAuthenticationActivity extends AppCompatActivity {
@@ -30,13 +33,12 @@ public class UserAuthenticationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private TextView titleTextView;
-    private Button continueButton;
-    private Button backButton;
-
     // TODO: 12/29/2021 Is there a better solution than this?
     public static final int SIGN_IN = 0;
     public static final int REGISTER = 1;
+
+    // a list containing the fragments that will be used in the users authentication
+    private List<Fragment> authForms;
 
     private final RequiredUserInfoFrag requiredInfoFragment = new RequiredUserInfoFrag();
     private final OptionalUserInfoFrag optionalUserInfoFragment = new OptionalUserInfoFrag();
@@ -44,7 +46,7 @@ public class UserAuthenticationActivity extends AppCompatActivity {
     // keep track of authType
     private int authType;
 
-    // the user object we will be populating and sending to firebase
+    private UserViewModel userModel;
     private User user;
 
 
@@ -53,65 +55,20 @@ public class UserAuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_authentication);
 
+
+        user = new User();
+
+        // whenever a change happens to the user
+        userModel = new UserViewModel();
+        userModel.getUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                UserAuthenticationActivity.this.user.setPassword(user.);
+            }
+        });
+
         // xml view elements
-        titleTextView = findViewById(R.id.userAuthenticationTitle);
-        
-        continueButton = findViewById(R.id.continueAuthenticationButton);
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // if the back button is pressed
-                if(requiredInfoFragment != null && requiredInfoFragment.isVisible()) {
-                    Log.d(TAG, "onClick: going to optional user info form");
-                    setCurrentFragment(optionalUserInfoFragment);
-                    continueButton.setText("Finish");
 
-                    // add all required data to the new user object
-                    user.setFirstName();
-                    user.setLastName();
-                    user.setEmail();
-                    user.setPassword();
-                }
-                else if (optionalUserInfoFragment != null && optionalUserInfoFragment.isVisible()) {
-                    Log.d(TAG, "onClick: going back to home fragment in main activity");
-                    // send user back to home screen
-                    // all user data should be saved to firebase
-
-
-
-                    Intent intent = new Intent(UserAuthenticationActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-                else {
-                    Log.d(TAG, "onClick: Error on back button");
-                    // TODO: 12/29/2021 figure out error frag/activity
-                }
-            }
-        });
-        
-        backButton = findViewById(R.id.backAuthenticationButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // if the back button is press
-                if(requiredInfoFragment != null && requiredInfoFragment.isVisible()) {
-                    Log.d(TAG, "onClick: going back to home fragment in main activity");
-                    // send user back to home screen
-                    // all data should be wiped, no update to firebase needed
-                    Intent intent = new Intent(UserAuthenticationActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-                else if (optionalUserInfoFragment != null && optionalUserInfoFragment.isVisible()) {
-                    Log.d(TAG, "onClick: going back to required info frag");
-                    setCurrentFragment(requiredInfoFragment);
-                    continueButton.setText("Continue");
-                }
-                else {
-                    Log.d(TAG, "onClick: Error on back button");
-                    // TODO: 12/29/2021 figure out error frag/activity
-                }
-            }
-        });
 
         // firebase elements
         mAuth = FirebaseAuth.getInstance();
@@ -127,19 +84,27 @@ public class UserAuthenticationActivity extends AppCompatActivity {
                 continueButton.setText("Finish");
             case REGISTER:
                 titleTextView.setText("Register");
+
         }
 
         setCurrentFragment(requiredInfoFragment);
 
-        user = new User();
+        authForms = new ArrayList<>();
+        requiredInfoFragment.onStop();
     }
 
     private void setCurrentFragment(Fragment fragment) {
+        // set the fragment that will be used next
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView, fragment)
                 .setReorderingAllowed(true)
                 .addToBackStack(fragment.getTag())
                 .commit();
+
+        // set the continue and back button based on position in authForm list
+        // when the buttons are clicked the fragments should be killed
+        //      data currently in them should be saved
+
     }
 
     /**
