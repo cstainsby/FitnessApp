@@ -111,5 +111,4 @@ public abstract class AuthenticationFragment extends Fragment {
 
     protected abstract void saveDataToFirebase();
 
-    public
 }
